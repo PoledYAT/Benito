@@ -5,8 +5,10 @@
 package mx.itson.Benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.Benito.entidades.Articulo;
+import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.ArticuloDAO;
 
 /**
@@ -14,6 +16,13 @@ import mx.itson.Benito.persistencia.ArticuloDAO;
  * @author pyatq
  */
 public class ArticuloListado extends javax.swing.JFrame {
+    
+     int id;
+    String clave;
+    String nombre;
+    String precio;
+    Proveedor proveedor;
+
 
     /**
      * Creates new form ArticuloListado
@@ -35,6 +44,9 @@ public class ArticuloListado extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblArticulo = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -56,6 +68,27 @@ public class ArticuloListado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblArticulo);
 
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,13 +97,26 @@ public class ArticuloListado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(40, 40, 40)
+                .addComponent(btnEditar)
+                .addGap(28, 28, 28)
+                .addComponent(btnEliminar)
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -91,6 +137,62 @@ public class ArticuloListado extends javax.swing.JFrame {
             });
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+        ArticuloFormulario formulario = new ArticuloFormulario(this, true, id, clave, nombre, precio, proveedor);
+        
+        formulario.setVisible(true);
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblArticulo.getModel();
+        int fila = tblArticulo.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        String clave = modelo.getValueAt(fila, 1).toString();
+        String nombre = modelo.getValueAt(fila, 2).toString();
+        String precio = modelo.getValueAt(fila, 3).toString();
+
+       ArticuloFormulario formulario = new ArticuloFormulario(this, true, id, clave, nombre, precio, proveedor);
+       formulario.setVisible(true);
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int A = JOptionPane.showConfirmDialog(this, "Estas seguro de eliminar los datos de Articulo?","estas Seguro?", JOptionPane.YES_NO_OPTION);
+                
+        if(A == 0){
+        DefaultTableModel modelo = (DefaultTableModel) tblArticulo.getModel();
+        
+        int fila = tblArticulo.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        
+        boolean operacion = false;
+        try{
+            
+        ArticuloDAO articuloDAO = new ArticuloDAO();
+        operacion = articuloDAO.eliminar(id);
+        
+        }catch(Exception ex){
+         System.err.println("Ocurrio un error: " + ex);
+        }
+        
+        if(operacion == true){
+        JOptionPane.showMessageDialog(this, "La operacion de eliminacion fue exitosa","Operacion excitosa", JOptionPane.INFORMATION_MESSAGE);
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "No se ha pudido eliminar","Operacion fallida", JOptionPane.WARNING_MESSAGE);
+        
+        }
+        
+        this.dispose();
+           ArticuloListado frame = new ArticuloListado();
+            frame.setVisible(true);
+    }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +230,9 @@ public class ArticuloListado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblArticulo;
     // End of variables declaration//GEN-END:variables
