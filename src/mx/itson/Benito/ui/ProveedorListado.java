@@ -5,6 +5,7 @@
 package mx.itson.Benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.ProveedorDAO;
@@ -14,6 +15,15 @@ import mx.itson.Benito.persistencia.ProveedorDAO;
  * @author pyatq
  */
 public class ProveedorListado extends javax.swing.JFrame {
+    
+     int id;
+    String nombre;
+    String clave;
+    String email;
+    String telefono;
+    String domicilio;
+    String contacto;
+
 
     /**
      * Creates new form ProveedorListado
@@ -34,6 +44,9 @@ public class ProveedorListado extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProveedor = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -55,6 +68,27 @@ public class ProveedorListado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblProveedor);
 
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -62,13 +96,26 @@ public class ProveedorListado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(36, 36, 36)
+                .addComponent(btnEditar)
+                .addGap(30, 30, 30)
+                .addComponent(btnEliminar)
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -91,6 +138,65 @@ public class ProveedorListado extends javax.swing.JFrame {
             });
      }
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+        ProveedorFormulario formulario = new ProveedorFormulario(this, true, id, nombre, clave, email, telefono, domicilio, contacto);
+        
+        formulario.setVisible(true);
+
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblProveedor.getModel();
+        int fila = tblProveedor.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        String nombre = modelo.getValueAt(fila, 1).toString();
+        String clave = modelo.getValueAt(fila, 2).toString();
+        String email = modelo.getValueAt(fila, 3).toString();
+        String telefono = modelo.getValueAt(fila, 4).toString();
+        String domicilio = modelo.getValueAt(fila, 5).toString();
+        String contacto = modelo.getValueAt(fila, 6).toString();
+        
+
+       ProveedorFormulario formulario = new ProveedorFormulario(this, true, id, nombre, clave, email, telefono, domicilio, contacto);
+       formulario.setVisible(true);
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        
+        int p = JOptionPane.showConfirmDialog(this, "Estas seguro de eliminar los datos de Proveedor?","estas Seguro?", JOptionPane.YES_NO_OPTION);
+                
+        if(p == 0){
+        DefaultTableModel modelo = (DefaultTableModel) tblProveedor.getModel();
+        int fila = tblProveedor.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        
+        boolean operacion = false;
+        try{
+        ProveedorDAO proveedorDAO = new ProveedorDAO();
+        operacion = proveedorDAO.eliminar(id);
+        
+        }catch(Exception ex){
+         System.err.println("Ocurrio un error: " + ex);
+        }
+        
+        if(operacion == true){
+        JOptionPane.showMessageDialog(this, "La operacion de eliminacion fue exitosa","Operacion excitosa", JOptionPane.INFORMATION_MESSAGE);
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "No se ha pudido eliminar","Operacion fallida", JOptionPane.WARNING_MESSAGE);
+        
+        this.dispose();
+        ProveedorListado frame = new ProveedorListado();
+            frame.setVisible(true);
+            
+        }
+    }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -128,6 +234,9 @@ public class ProveedorListado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProveedor;
     // End of variables declaration//GEN-END:variables
