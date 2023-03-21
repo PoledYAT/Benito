@@ -5,8 +5,11 @@
 package mx.itson.Benito.ui;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import mx.itson.Benito.entidades.Articulo;
 import mx.itson.Benito.entidades.OrdenCompra;
+import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.OrdenCompraDAO;
 
 /**
@@ -14,6 +17,16 @@ import mx.itson.Benito.persistencia.OrdenCompraDAO;
  * @author pyatq
  */
 public class OrdenCompraListado extends javax.swing.JFrame {
+    
+    int id;
+    String pedido;
+    String direccion;
+    String telefono;
+    String personaCompra;
+    String folio;
+    String total;
+    Articulo articulo;
+    Proveedor proveedor;
 
     /**
      * Creates new form OrdenCompraListado
@@ -35,6 +48,9 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrden = new javax.swing.JTable();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -56,6 +72,27 @@ public class OrdenCompraListado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblOrden);
 
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -64,13 +101,26 @@ public class OrdenCompraListado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1200, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAgregar)
+                .addGap(62, 62, 62)
+                .addComponent(btnEditar)
+                .addGap(64, 64, 64)
+                .addComponent(btnEliminar)
+                .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,6 +147,61 @@ public class OrdenCompraListado extends javax.swing.JFrame {
      }
 
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        OrdenCompraFormulario formulario = new OrdenCompraFormulario(this, true, id, pedido, direccion, telefono, personaCompra, folio, total, articulo, proveedor);
+        
+        formulario.setVisible(true);
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        DefaultTableModel modelo = (DefaultTableModel) tblOrden.getModel();
+        int fila = tblOrden.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        String pedido = modelo.getValueAt(fila, 1).toString();
+        String direccion = modelo.getValueAt(fila, 2).toString();
+        String telefono = modelo.getValueAt(fila, 3).toString();
+        String personaCompra = modelo.getValueAt(fila, 4).toString();
+        String folio = modelo.getValueAt(fila, 5).toString();
+        String total = modelo.getValueAt(fila, 6).toString();
+
+       OrdenCompraFormulario formulario = new OrdenCompraFormulario(this, true, id, pedido, direccion, telefono, personaCompra, folio, total, articulo, proveedor);
+        
+        formulario.setVisible(true);
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int O = JOptionPane.showConfirmDialog(this, "Estas seguro de eliminar los datos de Orden de Compra?","estas Seguro?", JOptionPane.YES_NO_OPTION);
+                
+        if(O == 0){
+        DefaultTableModel modelo = (DefaultTableModel) tblOrden.getModel();
+        
+        int fila = tblOrden.getSelectedRow();
+        int id = Integer.parseInt(modelo.getValueAt(fila,0).toString());
+        
+        boolean operacion = false;
+        try{
+            
+        OrdenCompraDAO ordenDAO = new OrdenCompraDAO();
+        operacion = ordenDAO.eliminar(id);
+        
+        }catch(Exception ex){
+         System.err.println("Ocurrio un error: " + ex);
+        }
+        
+        if(operacion == true){
+        JOptionPane.showMessageDialog(this, "La operacion de eliminacion fue exitosa","Operacion excitosa", JOptionPane.INFORMATION_MESSAGE);
+        
+        }else{
+        JOptionPane.showMessageDialog(this, "No se ha pudido eliminar","Operacion fallida", JOptionPane.WARNING_MESSAGE);
+        
+        }
+        
+        this.dispose();
+           OrdenCompraListado frame = new OrdenCompraListado();
+            frame.setVisible(true);
+    }
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,6 +239,9 @@ public class OrdenCompraListado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrden;
     // End of variables declaration//GEN-END:variables

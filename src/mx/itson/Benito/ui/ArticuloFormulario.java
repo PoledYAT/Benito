@@ -148,10 +148,9 @@ public class ArticuloFormulario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-         String clave = txtClave.getText();
+        String clave = txtClave.getText();
         String nombre = txtNombre.getText();
         String precio = txtPrecio.getText();
-        
         Proveedor proveedor = (Proveedor)cmbProveedor.getSelectedItem();
         
         boolean operacion = false;
