@@ -11,7 +11,7 @@ import mx.itson.Benito.persistencia.ArticuloDAO;
 import mx.itson.Benito.persistencia.ProveedorDAO;
 
 /**
- *
+ * Se podra agregar nuevos Articulos y se podra editar 
  * @author pyatq
  */
 public class ArticuloFormulario extends javax.swing.JDialog {

@@ -12,7 +12,7 @@ import javax.persistence.Id;
 
 
 /**
- *
+ * lista de entidades de tipos de valores y propiedades Proveedor
  * @author pyatq
  */
 @Entity
@@ -86,5 +86,8 @@ public class Proveedor {
         this.contacto = contacto;
     }
 
-   
+   @Override
+    public String toString(){
+        return this.nombre;
+    }
 }

@@ -12,7 +12,7 @@ import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.ArticuloDAO;
 
 /**
- *
+ * se motrara los datos desde una tabla con sus dotones de agregar, editar y eliminar 
  * @author pyatq
  */
 public class ArticuloListado extends javax.swing.JFrame {

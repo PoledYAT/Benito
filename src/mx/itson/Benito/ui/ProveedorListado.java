@@ -11,7 +11,7 @@ import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.ProveedorDAO;
 
 /**
- *
+ * se motrara los datos desde una tabla con sus dotones de agregar, editar y eliminar 
  * @author pyatq
  */
 public class ProveedorListado extends javax.swing.JFrame {

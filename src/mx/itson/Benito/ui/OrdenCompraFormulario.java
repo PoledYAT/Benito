@@ -4,7 +4,6 @@
  */
 package mx.itson.Benito.ui;
 
-import static java.awt.image.ImageObserver.ERROR;
 import java.util.List;
 import javax.swing.JOptionPane;
 import mx.itson.Benito.entidades.Articulo;
@@ -14,7 +13,7 @@ import mx.itson.Benito.persistencia.OrdenCompraDAO;
 import mx.itson.Benito.persistencia.ProveedorDAO;
 
 /**
- *
+ * Se podra agregar nuevas Ordenes de Compra y se podra editar 
  * @author pyatq
  */
 public class OrdenCompraFormulario extends javax.swing.JDialog {
@@ -142,6 +141,10 @@ public class OrdenCompraFormulario extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
+                .addGap(79, 79, 79))
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,10 +168,6 @@ public class OrdenCompraFormulario extends javax.swing.JDialog {
                             .addComponent(cmbArticulo, 0, 337, Short.MAX_VALUE)
                             .addComponent(cmbProveedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(249, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addGap(79, 79, 79))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,7 +204,7 @@ public class OrdenCompraFormulario extends javax.swing.JDialog {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
                 .addGap(25, 25, 25))
         );

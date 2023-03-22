@@ -14,10 +14,15 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 /**
- *
+ * DATA ACCESS OBJECT, que acede a los datos de la tabla Articulo
  * @author pyatq
  */
 public class ArticuloDAO {
+    
+    /**
+     * Obtine todas las entidades de la lista de Articulo
+     * @return a Articulo
+     */
     
     public static List <Articulo> obtenerTodos(){
         List<Articulo> articulos = new ArrayList<>();
@@ -39,12 +44,12 @@ public class ArticuloDAO {
     }
     
     /**
-     * 
-     * @param clave
-     * @param nombre
-     * @param precio
-     * @param proveedor
-     * @return 
+     * Es para guardar los datos de Articulo
+     * @param clave guarda los valores de clave 
+     * @param nombre guarda nombre
+     * @param precio guarda precio
+     * @param proveedor guarda proveedor
+     * @return Indica si el registro fue guardado correcta mente
      */
      public static boolean guardar(String clave, String nombre, double precio, Proveedor proveedor){
         boolean resultado = false;
@@ -75,9 +80,9 @@ public class ArticuloDAO {
     }
     
     /**
-     * 
-     * @param id
-     * @return 
+     * Es para obtener los datos de Articulo desde su ID
+     * @param id obtendremos los datos desde el ID
+     * @return retorna conductor de lo contrario retarna a null
      */
      
     public Articulo obtenerPorId(int id){
@@ -95,13 +100,13 @@ public class ArticuloDAO {
     }
     
     /**
-     * 
-     * @param id
-     * @param clave
-     * @param nombre
-     * @param precio
-     * @param proveedor
-     * @return 
+     * Es para editar los datos de la tabla de Articulo
+     * @param id el ID se quedara igual por el int
+     * @param clave se podra editar la clave
+     * @param nombre se podra editar el nombre
+     * @param precio se pobra editar el precio
+     * @param proveedor se podra editar al proveedor
+     * @return es para indicar si el registro fue editado de Articulo retorna false
      */
     public boolean editar(int id, String clave, String nombre, double precio, Proveedor proveedor){
         
@@ -133,9 +138,9 @@ public class ArticuloDAO {
     }
     
     /**
-     * 
-     * @param id
-     * @return 
+     * Es para eliminar una una fila de un dato de Articulo desde el ID
+     * @param id se eliminara el dato desde el ID
+     * @return si el registro se elimina correcta mente entrara; pero si no, retornara flase 
      */
     
     public boolean eliminar(int id){

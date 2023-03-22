@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import mx.itson.Benito.persistencia.ProveedorDAO;
 
 /**
- *
+ * Se podra agregar nuevos proveedores y se podra editar 
  * @author pyatq
  */
 public class ProveedorFormulario extends javax.swing.JDialog {

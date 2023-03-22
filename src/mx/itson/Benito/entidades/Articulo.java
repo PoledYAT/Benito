@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * lista de entidades de tipos de valores y propiedades Articulo
  * @author pyatq
  */
 @Entity
@@ -69,5 +69,10 @@ public class Articulo {
 
     public void setProveedor(Proveedor proveedor) {
         this.proveedor = proveedor;
+    }
+    
+    @Override
+    public String toString(){
+        return this.nombre;
     }
 }

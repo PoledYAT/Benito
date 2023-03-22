@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
- *
+ * lista de entidades de tipos de valores y propiedades de Orden de Compra 
  * @author pyatq
  */
 @Entity
@@ -29,7 +29,7 @@ public class OrdenCompra {
     private String personaCompra;
     private String folio;
     private double total;
-    
+   
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="idArticulo")
     private Articulo articulo;
@@ -37,7 +37,7 @@ public class OrdenCompra {
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="idProveedor")
     private Proveedor proveedor;
-
+     
     public int getId() {
         return id;
     }

@@ -13,7 +13,7 @@ import mx.itson.Benito.entidades.Proveedor;
 import mx.itson.Benito.persistencia.OrdenCompraDAO;
 
 /**
- *
+ * se motrara los datos desde una tabla con sus dotones de agregar, editar y eliminar 
  * @author pyatq
  */
 public class OrdenCompraListado extends javax.swing.JFrame {
