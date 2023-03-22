@@ -47,6 +47,8 @@ public class ProveedorListado extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnArticulo = new javax.swing.JButton();
+        btnOrdenCompra = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -89,6 +91,20 @@ public class ProveedorListado extends javax.swing.JFrame {
             }
         });
 
+        btnArticulo.setText("Articulo");
+        btnArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArticuloActionPerformed(evt);
+            }
+        });
+
+        btnOrdenCompra.setText("Orden de Compra");
+        btnOrdenCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenCompraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,6 +114,10 @@ public class ProveedorListado extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnOrdenCompra)
+                .addGap(18, 18, 18)
+                .addComponent(btnArticulo)
+                .addGap(18, 18, 18)
                 .addComponent(btnAgregar)
                 .addGap(36, 36, 36)
                 .addComponent(btnEditar)
@@ -114,7 +134,9 @@ public class ProveedorListado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnArticulo)
+                    .addComponent(btnOrdenCompra))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -198,6 +220,18 @@ public class ProveedorListado extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticuloActionPerformed
+        ArticuloListado listado = new ArticuloListado();
+        listado.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnArticuloActionPerformed
+
+    private void btnOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenCompraActionPerformed
+        OrdenCompraListado listado = new OrdenCompraListado();
+        listado.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnOrdenCompraActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -235,8 +269,10 @@ public class ProveedorListado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnArticulo;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnOrdenCompra;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProveedor;
     // End of variables declaration//GEN-END:variables

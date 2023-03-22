@@ -51,6 +51,8 @@ public class OrdenCompraListado extends javax.swing.JFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        btnProveedor = new javax.swing.JButton();
+        btnArticulo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -93,6 +95,20 @@ public class OrdenCompraListado extends javax.swing.JFrame {
             }
         });
 
+        btnProveedor.setText("Proveedor");
+        btnProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProveedorActionPerformed(evt);
+            }
+        });
+
+        btnArticulo.setText("Articulo");
+        btnArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnArticuloActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,6 +119,10 @@ public class OrdenCompraListado extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnArticulo)
+                .addGap(59, 59, 59)
+                .addComponent(btnProveedor)
+                .addGap(28, 28, 28)
                 .addComponent(btnAgregar)
                 .addGap(62, 62, 62)
                 .addComponent(btnEditar)
@@ -119,7 +139,9 @@ public class OrdenCompraListado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnEditar)
-                    .addComponent(btnEliminar))
+                    .addComponent(btnEliminar)
+                    .addComponent(btnProveedor)
+                    .addComponent(btnArticulo))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -203,6 +225,18 @@ public class OrdenCompraListado extends javax.swing.JFrame {
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArticuloActionPerformed
+        ArticuloListado listado = new ArticuloListado();
+        listado.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnArticuloActionPerformed
+
+    private void btnProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProveedorActionPerformed
+        ProveedorListado listado = new ProveedorListado();
+        listado.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnProveedorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -240,8 +274,10 @@ public class OrdenCompraListado extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnArticulo;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnProveedor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrden;
     // End of variables declaration//GEN-END:variables
